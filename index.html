@@ -17,14 +17,60 @@
    <main id="app">
     <section id="map"></section>
 
+    <h2>Add a Landmark</h2>
+
     <section id="controls">
-      <!-- Landmark form goes here -->
+
+      <form id="landmarkForm">
+  <label>
+    Title:
+    <input type="text" id="title" required>
+  </label>
+
+  <label>
+    Description:
+    <textarea id="description" rows="3" required></textarea>
+  </label>
+
+  <label>
+    Photo:
+    <input type="file" id="photo" accept="image/*" required>
+  </label>
+
+  <fieldset>
+    <legend>Location</legend>
+
+    <button type="button" id="useLocation">
+      Use My Current Location
+    </button>
+
+     <p>— OR —</p>
+
+    <label>
+      Latitude:
+      <input type="number" id="lat" step="any">
+    </label>
+
+    <label>
+      Longitude:
+      <input type="number" id="lng" step="any">
+    </label>
+  </fieldset>
+
+  <button type="submit">Add Landmark</button>
+</form>
+
+<hr>
+
+<h2>Landmarks</h2>
+<ul id="landmarkList"></ul>
+
     </section>
   </main>
 
   <script src="js/app.js"></script>
   <!-- Google Maps API script will go here later -->
 
-  
+
 </body>
 </html>
