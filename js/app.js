@@ -1,53 +1,86 @@
-const landmarks = [];
+document.addEventListener("DOMContentLoaded", () => {
 
-function initApp() {
-  console.log("Walking Tour App Loaded");
-}
+  const landmarks = [];
+  let selectedLocation = null;
 
-window.onload = initApp;
+  const form = document.getElementById("landmarkForm");
+  const landmarkList = document.getElementById("landmarkList");
+  const useLocationBtn = document.getElementById("useLocation");
 
-const form = document.getElementById("landmarkForm");
-const landmarkList = document.getElementById("landmarkList");
-const useLocationBtn = document.getElementById("useLocation");
+  // Use browser geolocation
+  useLocationBtn.addEventListener("click", () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation not supported");
+      return;
+    }
 
-//form submission
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        selectedLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        alert("Location captured!");
+      },
+      () => alert("Unable to retrieve location")
+    );
+  });
 
-  const title = document.getElementById("title").value.trim();
-  const description = document.getElementById("description").value.trim();
-  const photoFile = document.getElementById("photo").files[0];
+  // Handle form submission
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  let lat = document.getElementById("lat").value;
-  let lng = document.getElementById("lng").value;
+    const title = document.getElementById("title").value.trim();
+    const description = document.getElementById("description").value.trim();
+    const photoFile = document.getElementById("photo").files[0];
 
-  // Determine location source
-  let location = selectedLocation;
+    const latInput = document.getElementById("lat").value;
+    const lngInput = document.getElementById("lng").value;
 
-  if (!location && lat && lng) {
-    location = {
-      lat: parseFloat(lat),
-      lng: parseFloat(lng)
-    };
-  }
+    let location = selectedLocation;
 
-  if (!location) {
-    alert("Please provide a location");
-    return;
-  }
+    if (!location && latInput && lngInput) {
+      location = {
+        lat: parseFloat(latInput),
+        lng: parseFloat(lngInput)
+      };
+    }
 
-  //storing image in memory:
+    if (!location) {
+      alert("Please provide a location");
+      return;
+    }
+
     const imageURL = URL.createObjectURL(photoFile);
-    const landmark = {
-    id: Date.now(),
-    title,
-    description,
-    imageURL,
-    location
-  };
-   landmarks.push(landmark);
-  renderLandmarks();
 
-  form.reset();
-  selectedLocation = null;
+    const landmark = {
+      id: Date.now(),
+      title,
+      description,
+      imageURL,
+      location
+    };
+
+    landmarks.push(landmark);
+    renderLandmarks();
+
+    form.reset();
+    selectedLocation = null;
+  });
+
+  function renderLandmarks() {
+    landmarkList.innerHTML = "";
+
+    landmarks.forEach((lm) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <h3>${lm.title}</h3>
+        <p>${lm.description}</p>
+        <p>Lat: ${lm.location.lat.toFixed(4)}, Lng: ${lm.location.lng.toFixed(4)}</p>
+        <img src="${lm.imageURL}" width="200">
+      `;
+      landmarkList.appendChild(li);
+    });
+  }
+
 });
