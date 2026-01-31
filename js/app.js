@@ -1,3 +1,6 @@
+let map;
+let markers = [];
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const landmarks = [];
@@ -7,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const landmarkList = document.getElementById("landmarkList");
   const useLocationBtn = document.getElementById("useLocation");
 
-  // Use browser geolocation
+
+  // using browser geolocation
   useLocationBtn.addEventListener("click", () => {
     if (!navigator.geolocation) {
       alert("Geolocation not supported");
@@ -26,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 
-  // Handle form submission
+  //  form submission
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -63,24 +67,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
     landmarks.push(landmark);
     renderLandmarks();
+    map.setCenter(location);
+    map.setZoom(14);
+
 
     form.reset();
     selectedLocation = null;
   });
 
   function renderLandmarks() {
+    markers.forEach(marker => marker.setMap(null));
+    markers = [];
+
     landmarkList.innerHTML = "";
 
     landmarks.forEach((lm) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <h3>${lm.title}</h3>
-        <p>${lm.description}</p>
-        <p>Lat: ${lm.location.lat.toFixed(4)}, Lng: ${lm.location.lng.toFixed(4)}</p>
-        <img src="${lm.imageURL}" width="200">
-      `;
-      landmarkList.appendChild(li);
-    });
+  
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <h3>${lm.title}</h3>
+    <p>${lm.description}</p>
+    <p>Lat: ${lm.location.lat.toFixed(4)}, Lng: ${lm.location.lng.toFixed(4)}</p>
+    <img src="${lm.imageURL}" width="200">
+  `;
+  landmarkList.appendChild(li);
+
+  // creating the map marker
+  const marker = new google.maps.Marker({
+    position: lm.location,
+    map: map,
+    title: lm.title,
+  });
+
+  //info window
+  const infoWindow = new google.maps.InfoWindow({
+    content: `
+      <h3>${lm.title}</h3>
+      <p>${lm.description}</p>
+      <img src="${lm.imageURL}" width="200">
+    `
+  });
+
+
+  marker.addListener("click", () => {
+    infoWindow.open(map, marker);
+  });
+
+
+  markers.push(marker);
+});
   }
 
 });
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 43.2557, lng: -79.8711 }, // starting frmo hamilton
+    zoom: 12,
+  });
+}
+
