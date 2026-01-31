@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     title: lm.title,
   });
 
-  //info window
+  //info window for marker when its clicked
   const infoWindow = new google.maps.InfoWindow({
     content: `
       <h3>${lm.title}</h3>
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `
   });
 
-
+// click listener for marker
   marker.addListener("click", () => {
     infoWindow.open(map, marker);
   });
