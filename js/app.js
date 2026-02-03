@@ -52,8 +52,22 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     }
 
+    formError.textContent = "";
+    
     if (!location) {
-      alert("Please enter a location");
+      formError.textContent = "Please enter a location";
+      return;
+    }
+    if (!title) {
+      formError.textContent = "Please enter a title";
+      return;
+    }
+    if (!description) {
+      formError.textContent = "Please enter a description";
+      return;
+    }
+    if (!photoFile) {
+      formError.textContent = "Please upload a photo";
       return;
     }
 
