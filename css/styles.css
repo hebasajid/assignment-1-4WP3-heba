@@ -133,6 +133,15 @@ header {
 }
 
 
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
 @media (max-width: 768px) {
   #app {
     flex-direction: column;
