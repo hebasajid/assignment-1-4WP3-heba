@@ -84,6 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
     landmarks.forEach((lm) => {
   
   const li = document.createElement("li");
+  li.dataset.id = lm.id;
+
   li.innerHTML = `
     <h3>${lm.title}</h3>
     <p>${lm.description}</p>
@@ -117,9 +119,24 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 // click listener for marker
-  marker.addListener("click", () => {
-    infoWindow.open(map, marker);
+ marker.addListener("click", () => {
+  infoWindow.open(map, marker);
+
+  // removing highlight from  list items when another marker is clicked
+  document.querySelectorAll("#landmarkList li").forEach(li => {
+    li.classList.remove("highlight");
   });
+
+  // highlighting the clicked landmark
+  const activeLi = document.querySelector(
+    `#landmarkList li[data-id="${lm.id}"]`
+  );
+
+  if (activeLi) {
+    activeLi.classList.add("highlight");
+  }
+});
+
 
 
   markers.push(marker);
