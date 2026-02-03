@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("landmarkForm");
   const landmarkList = document.getElementById("landmarkList");
   const useLocationBtn = document.getElementById("useLocation");
+  const formError = document.getElementById("formError"); //error element 
+
 
 
   // using browser geolocation
