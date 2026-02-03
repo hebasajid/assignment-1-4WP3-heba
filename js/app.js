@@ -93,6 +93,13 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
   landmarkList.appendChild(li);
 
+  // delete button functionality
+  const deleteBtn = li.querySelector(".delete-btn");
+  deleteBtn.addEventListener("click", () => {
+    landmarks = landmarks.filter(l => l.id !== lm.id);
+    renderLandmarks();
+  });
+
   // creating the map marker
   const marker = new google.maps.Marker({
     position: lm.location,
