@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     formError.textContent = "";
-    
+
     if (!location) {
       formError.textContent = "Please enter a location";
       return;
@@ -86,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
     map.setCenter(location);
     map.setZoom(14);
 
+
+    formError.textContent = "";
 
     form.reset();
     selectedLocation = null;
