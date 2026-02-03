@@ -3,7 +3,7 @@ let markers = [];
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  const landmarks = [];
+  let landmarks = [];
   let selectedLocation = null;
 
   const form = document.getElementById("landmarkForm");
@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        alert("Location captured!");
+        alert("Location captured");
       },
-      () => alert("Unable to retrieve location")
+      () => alert("Cannot to retrieve location")
     );
   });
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!location) {
-      alert("Please provide a location");
+      alert("Please enter a location");
       return;
     }
 
@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <p>${lm.description}</p>
     <p>Lat: ${lm.location.lat.toFixed(4)}, Lng: ${lm.location.lng.toFixed(4)}</p>
     <img src="${lm.imageURL}" width="200">
+    <button class="delete-btn">Delete</button>
   `;
   landmarkList.appendChild(li);
 
