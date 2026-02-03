@@ -119,6 +119,10 @@ header {
   text-align: center;
 }
 
+.highlight {
+  border: 2px solid #007bff;
+  background-color: #ecdf57;
+}
 
 
 @media (max-width: 768px) {
