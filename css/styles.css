@@ -23,9 +23,9 @@ header {
 
 #map {
   flex: 1;
-  min-height: 300px;
+  min-height: 400px;
   background-color: #e0e0e0; 
-  border: 2px solid red; 
+ 
 }
 
 #landmarkForm {
