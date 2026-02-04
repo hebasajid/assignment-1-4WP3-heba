@@ -1,0 +1,21 @@
+While developing this project, I encountered various types of issues related to the client-side
+that made me have to resolve them, which in turn, helped me reinforce my understanding of Javascript.
+I had a problem where the buttons weren't responding because of event listeners being attached before
+the DOM had fully loaded. I fixed this by restructuring the code to use the DOMContentLoaded event 
+which I was able to figure out through some research. 
+(Commit Hash: 002620c74cfeb0d4e48fc2a41e7b8f861bebf416). When integrating the 
+Google Maps API, I kept getting a blank map due to the initMap function not being 
+called, which I resolved by adding the proper callback parameter to the API script and
+ensuring correct script loading order (795cbaaadfdf17bf278670e41de5acb0c6137809). I also had to 
+ensure I had a working and viable API link obtained from Google Maps, otherwise I realized it wouldn't work.
+Through this process, I learned the importance of careful script loading, maintaining a single source of truth for application state,
+and improving user experience through feedback and design.
+
+I also implemented 4 additional features which includes deleting landmarks and
+their markers, displaying a  landmark list that updates with the map, highlighting a landmark
+in the list when its marker is clicked, and adding basic form validation with user-friendly
+error messages. 
+
+GitHub Link to Repository: https://github.com/hebasajid/assignment-1-4WP3-heba
+Total Commits: 20
+       

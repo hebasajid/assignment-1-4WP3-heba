@@ -4,8 +4,6 @@ body {
   background-color: #f9f9f9;
 }
 
-
-
 header {
   padding: 1rem;
   background: #bbeeb9;
@@ -96,19 +94,6 @@ header {
 }
 
 
-#landmarkList {
-  list-style: none;
-  padding: 0;
-}
-
-#landmarkList li {
-  padding: 0.75rem;
-  border-bottom: 1px solid #eee;
-  font-size: 0.9rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
-  border-radius: 4px;
-}
 
 #controls {
   background: #ffffff;
